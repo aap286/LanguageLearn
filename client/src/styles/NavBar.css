@@ -1,0 +1,57 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: transparent;
+    box-sizing: border-box;
+}
+
+/* body of the navigation bar */
+.nav {
+    background-color: #333;
+    color: white;
+    display: flex;
+    justify-content:space-between;
+    align-items: stretch;
+    gap: 2rem;
+    padding: 0 4rem;
+    font-size: 2rem;
+    height: 4.5rem;
+}
+
+.nav .site-title {
+    font-size: 3rem;
+    display: flex;
+    align-items: center;
+    color: inherit;
+    text-decoration: none;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+}
+
+.nav ul a {
+    color:inherit;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 0.25rem;
+    height: 100%;
+}
+
+.nav li:hover {
+    background-color: #777;
+}
+
+.nav li.active {
+    background-color: #555;
+}
+
+.container {
+    margin: 1rem;
+    text-align: center;
+}
+
+
