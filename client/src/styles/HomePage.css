@@ -68,8 +68,6 @@
     background-color: rgb(1, 148, 21);
     color: whitesmoke;
     border-radius: 20px;
-    display: flex;
-    align-content: center;
     padding: 5px 10px;
     border: none;
 }
@@ -88,8 +86,12 @@
 .formContainer label input[type="text"] {
     font-size: inherit;
     padding: 5px 7px;
+    text-indent: 7px; 
+    color:cornflowerblue;
 }
 
 .formContainer label input[type="text"]:focus {
-  text-indent: 7px; 
+    color:cornflowerblue;
+    text-indent: 7px; 
 }
+
