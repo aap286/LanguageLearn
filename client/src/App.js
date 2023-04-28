@@ -8,74 +8,91 @@ import "./styles/HomePage.css";
 function App() {
   // * initializing list
   const [toDoList, setToDoList] = useState([]);
- 
-  // * adds task to list
+
+  useEffect(() => {
+    const storedToDoList = JSON.parse(localStorage.getItem("toDoList"));
+
+    if (storedToDoList) {
+      setToDoList(storedToDoList);
+    } else {
+      setToDoList(["help"]); // default value
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("toDoList", JSON.stringify(toDoList));
+  }, [toDoList]);
+
+  // * adds item to list
   const handleAddTask = (newTask) => {
-    setToDoList([...toDoList, newTask]);
+    const updatedList = [...toDoList, newTask];
+    setToDoList(updatedList);
   };
 
-  // * removes task to list
+  // * removes item from list
   const removeTask = (itemToRemove) => {
     const updatedList = toDoList.filter((item) => item !== itemToRemove);
     setToDoList(updatedList);
   };
 
-  useEffect(() => {
-    // console.log(toDoList)
-     console.log(window.localStorage.getItem("toDoList"));
-    //  setToDoList(window.localStorage.getItem("toDoList"));
-   }, []);
+  // * removes last item from list
+  const removeLastItem = () => {
+    const updatedList = [...toDoList];
+    updatedList.pop();
+    setToDoList(updatedList);
+  };
+
+  // * removes item from specific index
+  const removeCertainTask = (index) => {
+    console.log("removing specific task");
+    
+      const updatedList = [...toDoList];
+      updatedList.splice(index, 1);
+      setToDoList(updatedList);
+  };
   
-  useEffect(() => {
-    window.localStorage.setItem("toDoList", toDoList);
-    console.log(toDoList)
-  }, [toDoList]);
+  // * downlod tasks
+  const downloadTask = () => {
+    console.log("download task");
 
-
-  const [count, setCount] = useState(0);
-
-  // useEffect(() => {
-  //   console.log(JSON.parse(window.localStorage.getItem("count")));
-  //   // setCount(JSON.parse(window.localStorage.getItem("count")));
-  // }, []);
-
-  useEffect(() => {
-    window.localStorage.setItem("count", count);
-  }, [count]);
-
-  const increaseCount = () => {
-    return setCount(count + 2);
-  };
-  const decreaseCount = () => {
-    return setCount(count - 2);
-  };
+    const element = document.createElement("a");
+    
+    const string = toDoList.join("\n");
+    // console.log(string)
+    const file = new Blob([string], { type: "text/plain" });
+    element.href = URL.createObjectURL(file);
+    element.download = "example.txt";
+    document.body.appendChild(element);
+    element.click();
+  }
 
   return (
     <>
-      <div className="Heading"> ToDo List</div>
+      <div className="mainBody">
+        <div className="Heading"> ToDo List</div>
 
-      <div className="ListContainer">
-        <ul>
-          {toDoList.length > 0 ? (
-            <ListGenerated items={toDoList} />
-          ) : (
-            <h1>Clearly you are jobless</h1>
-          )}
-        </ul>
-      </div>
+        <div className="ListContainer">
+          <ul>
+            {toDoList.length > 0 ? (
+              <ListGenerated
+                items={toDoList}
+                removeCertainTask={removeCertainTask}
+              />
+            ) : (
+              <h1>Clearly you are jobless</h1>
+            )}
+          </ul>
+        </div>
 
-      <div className="formContainer">
-        <Form
-          onAddTask={handleAddTask}
-          toDoList={toDoList}
-          onRemoveTask={removeTask}
-        />
-      </div>
-
-      <div className="App">
-        <h1> Count {count} </h1>
-        <button onClick={increaseCount}>+</button>
-        <button onClick={decreaseCount}>-</button>
+        <div className="formContainer">
+          <Form
+            onAddTask={handleAddTask}
+            toDoList={toDoList}
+            onRemoveTask={removeTask}
+            removeLastItem={removeLastItem}
+            downloadTask={downloadTask}
+          />
+        </div>
       </div>
     </>
   );

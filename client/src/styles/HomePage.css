@@ -7,10 +7,24 @@
 
 }
 
+#root {
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+}
+
+.mainBody {
+    /* background-color: antiquewhite; */
+    padding: 25px;
+    display: inline-block;
+    background-color: antiquewhite;
+    border-radius: 20px;
+}
+
 .Heading {
     font-size: 34px;
     text-align: center;
-    margin-top: 5rem;
+    /* margin-top: 5rem; */
     background-color:cornflowerblue;
     color:whitesmoke;
     border-radius: 20px;
@@ -24,6 +38,7 @@
 .ListContainer ul {
     display: flex;
     flex-direction: column;
+    justify-content: left;
 }
 
 .ListContainer h1 {
@@ -48,8 +63,19 @@
     transition: 1s ease-out 0s;
 }    
 
-.ListContainer li:hover {
+/* .ListContainer li:hover {
     transform: translateY(-2.5px);
+} */
+
+.ListContainer button {
+    border: none;
+    margin-left: 5px;
+    color:crimson;
+}
+
+.ListContainer button svg:hover{
+    transition: 0.5s ease-out;
+    transform: translateY(-2px);
 }
 
 /* form styles */
@@ -62,6 +88,7 @@
     font-size: 30px;
 }
 
+
 .formContainer label button{
     /* width: 200px; */
     font-size: inherit;
@@ -70,10 +97,15 @@
     border-radius: 20px;
     padding: 5px 10px;
     border: none;
+    height: 100%;
 }
 
-.formContainer label button:last-child{
+.formContainer label .removeSection button:nth-child(1){
     background-color: crimson;
+}
+
+.formContainer label .removeSection button:nth-child(2){
+    background-color: darkred   ;
 }
 
 .formContainer label input {
@@ -87,6 +119,7 @@
     font-size: inherit;
     padding: 5px 7px;
     text-indent: 7px; 
+    height: 100%;
     color:cornflowerblue;
 }
 
@@ -95,3 +128,13 @@
     text-indent: 7px; 
 }
 
+.removeSection,
+.updateSection {
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}
+
+.updateSection button:nth-child(2) {
+    background-color: coral;
+}
